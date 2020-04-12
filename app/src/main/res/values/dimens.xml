@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_margin">12dp</dimen>
+    <dimen name="text_heading">22sp</dimen>
+    <dimen name="text_heading_numbers">24sp</dimen>
+</resources>
