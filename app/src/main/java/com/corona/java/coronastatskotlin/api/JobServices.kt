@@ -1,18 +1,16 @@
 package com.corona.java.coronastatskotlin.api
 
-import com.corona.java.coronastatskotlin.util.Constant
-import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import com.squareup.okhttp.ResponseBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.Response
-import retrofit2.http.FormUrlEncoded
-import java.util.*
 import retrofit2.http.GET
+import java.util.*
 
 
 interface JobServices {
     @GET("timeseries.json")
-    fun getJSON(): Call<String>
     //open fun getFlowers(): Call<JsonElement?>?
+    fun getJSON(): Call<JsonObject>
 
 }
