@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.corona.java.coronastatskotlin.api.JobAPI
 import com.corona.java.coronastatskotlin.api.JobServices
 import com.corona.java.coronastatskotlin.main.CaseNumbersInteractor
+import com.corona.java.coronastatskotlin.util.Common
 import com.corona.java.coronastatskotlin.util.Constant
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -63,9 +64,9 @@ class CaseRepos : CaseNumbersInteractor.casesModel {
 
                         }
 
-                        confirmedf = String.format("%.0f", confirmed)
-                        deathsf = String.format("%.0f", deaths)
-                        recoveredf = String.format("%.0f", recovered)
+                        confirmedf = Common.formatNumber(confirmed)
+                        deathsf = Common.formatNumber(deaths)
+                        recoveredf = Common.formatNumber(recovered)
                         presenter.uiAutoUpdate()
                     }
 
