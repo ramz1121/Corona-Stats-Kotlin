@@ -15,20 +15,13 @@ class MainPresenter(mainView: CaseNumbersInteractor.mainView) :
         model?.getTotalCases(this)
     }
 
-    override fun showTotalDeaths(): String {
-        TODO("Not yet implemented")
-        model.getTotalDeaths()
-    }
+    override fun showTotalDeaths() = model.getTotalDeaths()
 
-    override fun showTotalConfirmed(): String {
-        TODO("Not yet implemented")
-        model.getTotalConfirmed()
-    }
 
-    override fun showTotalRecovered(): String {
-        TODO("Not yet implemented")
-        model.getTotalRecovered()
-    }
+    override fun showTotalConfirmed() = model.getTotalConfirmed()
+
+
+    override fun showTotalRecovered() = model.getTotalRecovered()
 
 
 }

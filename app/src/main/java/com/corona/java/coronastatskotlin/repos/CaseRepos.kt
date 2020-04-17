@@ -7,6 +7,8 @@ import com.corona.java.coronastatskotlin.api.JobAPI
 import com.corona.java.coronastatskotlin.api.JobServices
 import com.corona.java.coronastatskotlin.main.CaseNumbersInteractor
 import com.corona.java.coronastatskotlin.util.Constant
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.google.gson.internal.LinkedTreeMap
 import com.squareup.okhttp.ResponseBody
 import okhttp3.RequestBody
@@ -30,46 +32,45 @@ class CaseRepos : CaseNumbersInteractor.casesModel {
 
 
     init {
-       // apiclient = JobAPI.getAPI()
+        apiclient = Constant.retrofitService
     }
 
     override fun getTotalCases(presenter: CaseNumbersInteractor.mainPresenter) {
-    /*    try {
-            //  Toast.makeText(this.con, "test", Toast.LENGTH_SHORT)
-
-            //if (Common.isInternetConnected(Objects.requireNonNull(context))) {
+        try {
             apiclient?.getJSON()
-                ?.enqueue(object : Callback<ResponseBody> {
+                ?.enqueue(object : Callback<JsonObject> {
                     override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>
+                        call: Call<JsonObject>,
+                        response: Response<JsonObject>
                     ) {
+
+                        var confirmed: Double = 0.0
+                        var recovered: Double = 0.0
+                        var deaths: Double = 0.0
                         val jsonResponse = response.body()
-                        print("hi")
-                        *//* val entrySet: Set<*> = jsonResponse.entries
-                     val it = entrySet.iterator()
-                     var confirmed = 0.0
-                     var deaths = 0.0
-                     var recovered = 0.0
-                     while (it.hasNext()) {
-                         val me =
-                             it.next() as Map.Entry<*, *>
-                         val Country = me.key.toString()
-                         val list = me.value as ArrayList<*>
-                         val last =
-                             list[list.size - 1] as LinkedTreeMap<*, *>
-                         confirmed = confirmed + last["confirmed"] as Double
-                         recovered = recovered + last["recovered"] as Double
-                         deaths = deaths + last["deaths"] as Double
-                     }
-                     confirmedf = confirmed.toString();
-                     deathsf = deaths.toString()
-                     recoveredf = recovered.toString()
-                     presenter.uiAutoUpdate()*//*
+                        val set = jsonResponse?.entrySet()
+                        val it = set?.iterator()
+                        while (it!!.hasNext()) {
+                            val item = it.next()
+                            val country = item.key
+                            val countryData = item.value
+                            val last =
+                                countryData.asJsonArray.get((countryData as JsonArray).size() - 1)
+                            print(last)
+                            confirmed = confirmed + last.asJsonObject["confirmed"].asDouble
+                            recovered = recovered + last.asJsonObject["recovered"].asDouble
+                            deaths = deaths + last.asJsonObject["deaths"].asDouble
+
+                        }
+
+                        confirmedf = String.format("%.0f", confirmed)
+                        deathsf = String.format("%.0f", deaths)
+                        recoveredf = String.format("%.0f", recovered)
+                        presenter.uiAutoUpdate()
                     }
 
                     override fun onFailure(
-                        call: Call<ResponseBody>,
+                        call: Call<JsonObject>,
                         t: Throwable
                     ) {
                     }
@@ -77,7 +78,8 @@ class CaseRepos : CaseNumbersInteractor.casesModel {
         } catch (e: Exception) {
             println(e.message)
         }
-*/
+
+
     }
 
 }

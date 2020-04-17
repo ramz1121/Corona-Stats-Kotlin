@@ -3,4 +3,5 @@
     <dimen name="main_margin">12dp</dimen>
     <dimen name="text_heading">22sp</dimen>
     <dimen name="text_heading_numbers">24sp</dimen>
+    <dimen name="layout_padding_8dp">8dp</dimen>
 </resources>
