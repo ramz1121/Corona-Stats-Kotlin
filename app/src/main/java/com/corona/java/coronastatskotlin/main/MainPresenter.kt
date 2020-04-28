@@ -17,11 +17,13 @@ class MainPresenter(mainView: CaseNumbersInteractor.mainView) :
 
     override fun showTotalDeaths() = model.getTotalDeaths()
 
-
     override fun showTotalConfirmed() = model.getTotalConfirmed()
 
-
     override fun showTotalRecovered() = model.getTotalRecovered()
+
+    override fun showActiveCases() = model.getActiveCases()
+
+    override fun showClosedCases() = model.getClosedCases()
 
 
 }

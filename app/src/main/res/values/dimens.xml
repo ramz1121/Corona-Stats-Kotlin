@@ -4,4 +4,8 @@
     <dimen name="text_heading">22sp</dimen>
     <dimen name="text_heading_numbers">24sp</dimen>
     <dimen name="layout_padding_8dp">8dp</dimen>
+    <dimen name="layout_padding_16dp">16dp</dimen>
+    <dimen name="layout_margin_24dp">24dp</dimen>
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
 </resources>

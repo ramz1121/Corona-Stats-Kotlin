@@ -39,4 +39,8 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
     implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.5.0")
+
 }

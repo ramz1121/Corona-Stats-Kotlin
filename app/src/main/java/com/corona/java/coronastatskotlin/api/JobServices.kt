@@ -10,8 +10,8 @@ import java.util.*
 
 
 interface JobServices {
+
     @GET(Constant.CASES)
-    //open fun getFlowers(): Call<JsonElement?>?
     fun getJSON(): Call<JsonObject>?
 
 }
