@@ -4,7 +4,6 @@ import com.corona.java.coronastatskotlin.api.JobServices
 import com.corona.java.coronastatskotlin.main.CaseNumbersInteractor
 import com.corona.java.coronastatskotlin.util.Common
 import com.corona.java.coronastatskotlin.util.Constant
-import com.github.mikephil.charting.data.Entry
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
