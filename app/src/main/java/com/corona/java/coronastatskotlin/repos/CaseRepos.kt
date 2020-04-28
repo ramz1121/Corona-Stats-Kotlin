@@ -1,36 +1,32 @@
 package com.corona.java.coronastatskotlin.repos
 
-import android.content.Context
-import android.util.Log
-import android.widget.Toast
-import com.corona.java.coronastatskotlin.api.JobAPI
 import com.corona.java.coronastatskotlin.api.JobServices
 import com.corona.java.coronastatskotlin.main.CaseNumbersInteractor
 import com.corona.java.coronastatskotlin.util.Common
 import com.corona.java.coronastatskotlin.util.Constant
+import com.github.mikephil.charting.data.Entry
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.google.gson.internal.LinkedTreeMap
-import com.squareup.okhttp.ResponseBody
-import okhttp3.RequestBody
-import okhttp3.internal.Util
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
-import java.net.URL
+import java.nio.channels.FileLock
+import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
+
 
 class CaseRepos : CaseNumbersInteractor.casesModel {
     private var apiclient: JobServices? = null
     private var confirmedf = ""
     private var recoveredf = ""
     private var deathsf = ""
+    private var totalclosedf = ""
+    private var totalactivef = ""
     override fun getTotalConfirmed() = confirmedf
     override fun getTotalDeaths() = deathsf
     override fun getTotalRecovered() = recoveredf
-
+    override fun getActiveCases() = totalactivef
+    override fun getClosedCases() = totalclosedf
 
     init {
         apiclient = Constant.retrofitService
@@ -45,9 +41,11 @@ class CaseRepos : CaseNumbersInteractor.casesModel {
                         response: Response<JsonObject>
                     ) {
 
-                        var confirmed: Double = 0.0
-                        var recovered: Double = 0.0
-                        var deaths: Double = 0.0
+                        var confirmed = 0.0
+                        var recovered = 0.0
+                        var deaths = 0.0
+                        var active = 0.0
+                        var closed = 0.0
                         val jsonResponse = response.body()
                         val set = jsonResponse?.entrySet()
                         val it = set?.iterator()
@@ -57,16 +55,21 @@ class CaseRepos : CaseNumbersInteractor.casesModel {
                             val countryData = item.value
                             val last =
                                 countryData.asJsonArray.get((countryData as JsonArray).size() - 1)
-                            print(last)
+                            print("value" + last)
                             confirmed = confirmed + last.asJsonObject["confirmed"].asDouble
                             recovered = recovered + last.asJsonObject["recovered"].asDouble
                             deaths = deaths + last.asJsonObject["deaths"].asDouble
-
                         }
 
                         confirmedf = Common.formatNumber(confirmed)
                         deathsf = Common.formatNumber(deaths)
                         recoveredf = Common.formatNumber(recovered)
+                        //get total active cases
+                        active = confirmed - (deaths + recovered)
+                        totalactivef = Common.formatNumber(active)
+                        //get total closed cases
+                        closed = deaths + recovered
+                        totalclosedf = Common.formatNumber(closed)
                         presenter.uiAutoUpdate()
                     }
 

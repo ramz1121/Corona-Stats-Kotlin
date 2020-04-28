@@ -12,16 +12,18 @@ class MainPresenter(mainView: CaseNumbersInteractor.mainView) :
     }
 
     override fun networkcall() {
-        model?.getTotalCases(this)
+        model.getTotalCases(this)
     }
 
     override fun showTotalDeaths() = model.getTotalDeaths()
 
-
     override fun showTotalConfirmed() = model.getTotalConfirmed()
 
-
     override fun showTotalRecovered() = model.getTotalRecovered()
+
+    override fun showActiveCases() = model.getActiveCases()
+
+    override fun showClosedCases() = model.getClosedCases()
 
 
 }
