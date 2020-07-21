@@ -9,9 +9,6 @@ import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.nio.channels.FileLock
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class CaseRepos : CaseNumbersInteractor.casesModel {
